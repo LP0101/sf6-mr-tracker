@@ -22,6 +22,8 @@ CREDENTIALS_PATH = os.environ.get("GOOGLE_CREDENTIALS_PATH", "credentials.json")
 EXPECTED_CHARACTER = os.environ.get("CFN_CHARACTER", "M. Bison")
 POLL_INTERVAL = int(os.environ.get("POLL_INTERVAL_SECONDS", 300))
 
+DISCORD_WEBHOOK_URL = os.environ.get("DISCORD_WEBHOOK_URL")
+
 BUCKLER_URL = (
     f"https://www.streetfighter.com/6/buckler/profile/{CFN_PLAYER_ID}/battlelog/rank"
 )
@@ -39,6 +41,15 @@ def _handle_signal(signum, _frame) -> None:
 
 signal.signal(signal.SIGTERM, _handle_signal)
 signal.signal(signal.SIGINT, _handle_signal)
+
+
+def notify_discord(message: str) -> None:
+    if not DISCORD_WEBHOOK_URL:
+        return
+    try:
+        requests.post(DISCORD_WEBHOOK_URL, json={"content": message}, timeout=10)
+    except Exception as e:
+        print(f"WARNING: Discord notification failed: {e}", file=sys.stderr, flush=True)
 
 
 def fetch_mr() -> tuple[int, str]:
@@ -117,6 +128,8 @@ def poll() -> None:
         return
     except requests.HTTPError as e:
         print(f"ERROR: HTTP {e.response.status_code} from Buckler", file=sys.stderr, flush=True)
+        if e.response.status_code == 403:
+            notify_discord("SF6 MR tracker: Buckler cookie has expired (HTTP 403). Update `BUCKLER_ID` to resume tracking.")
         return
 
     if character != EXPECTED_CHARACTER:

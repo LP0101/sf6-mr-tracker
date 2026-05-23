@@ -19,7 +19,7 @@ On each poll cycle the script fetches your rank battle log page, extracts the MR
 
 Log in to [www.streetfighter.com/6/buckler](https://www.streetfighter.com/6/buckler), open DevTools, and copy the value of the `buckler_id` cookie. This is your session token — the tracker is entirely cookie-authenticated.
 
-> The cookie TTL is unknown but community reports suggest it lasts weeks. When it expires the script prints `ERROR: HTTP 403 from Buckler`.
+> The cookie TTL is unknown but community reports suggest it lasts weeks. When it expires the script prints `ERROR: HTTP 403 from Buckler` and sends a Discord notification if `DISCORD_WEBHOOK_URL` is set.
 
 ### 3. Environment variables
 
@@ -34,6 +34,7 @@ GOOGLE_SHEET_ID=<spreadsheet ID from the sheet URL>
 GOOGLE_CREDENTIALS_PATH=credentials.json
 CFN_CHARACTER=M. Bison
 POLL_INTERVAL_SECONDS=300
+DISCORD_WEBHOOK_URL=https://discord.com/api/webhooks/...
 ```
 
 | Variable | Required | Default | Notes |
@@ -44,6 +45,7 @@ POLL_INTERVAL_SECONDS=300
 | `GOOGLE_CREDENTIALS_PATH` | no | `credentials.json` | Path to service account JSON key |
 | `CFN_CHARACTER` | no | `M. Bison` | Warns if your tracked character doesn't match |
 | `POLL_INTERVAL_SECONDS` | no | `300` | Seconds between polls (ignored with `--once`) |
+| `DISCORD_WEBHOOK_URL` | no | — | If set, sends a Discord message when the cookie expires (HTTP 403) |
 
 ## Running
 
