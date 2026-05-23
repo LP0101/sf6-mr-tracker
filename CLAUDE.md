@@ -43,6 +43,7 @@ The first sheet is resolved by index at startup via `init_sheet_title()` so rena
 | `GOOGLE_CREDENTIALS_PATH` | no | `credentials.json` | Service account JSON key |
 | `CFN_CHARACTER` | no | `M. Bison` | Warns if favorite character doesn't match |
 | `POLL_INTERVAL_SECONDS` | no | `300` | Ignored when running with `--once` |
+| `DISCORD_WEBHOOK_URL` | no | — | If set, sends a Discord message when the cookie expires (HTTP 403) |
 
 Google Sheets access uses a service account. The sheet must be shared with the service account email (Editor role).
 
