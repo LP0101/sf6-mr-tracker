@@ -1,0 +1,8 @@
+services:
+  sf6-tracker:
+    image: ghcr.io/lp0101/sf6-tracker:latest
+    build: .
+    env_file: .env
+    volumes:
+      - ./credentials.json:/app/credentials.json:ro
+    restart: unless-stopped
