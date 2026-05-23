@@ -1,5 +1,7 @@
 # sf6-mr-tracker
 
+> This project was built with AI assistance. The code was written by someone who knows what they're doing and has been reviewed before shipping.
+
 Polls your Street Fighter 6 Master Rating from the Buckler's Boot Camp site and logs every change to a Google Sheet with a timestamp.
 
 ## How it works
