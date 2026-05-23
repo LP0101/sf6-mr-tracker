@@ -1,6 +1,7 @@
 services:
   sf6-tracker:
-    image: ghcr.io/lp0101/sf6-tracker:latest
+    image: ghcr.io/lp0101/sf6-mr-tracker:latest
+    container_name: sf6-tracker
     build: .
     env_file: .env
     volumes:
