@@ -46,7 +46,7 @@ DISCORD_WEBHOOK_URL=https://discord.com/api/webhooks/...
 | `GOOGLE_SHEET_ID` | yes | — | Spreadsheet ID from the sheet URL |
 | `GOOGLE_CREDENTIALS_PATH` | no | `credentials.json` | Path to service account JSON key |
 | `CFN_CHARACTER` | no | `M. Bison` | Warns if your tracked character doesn't match |
-| `POLL_INTERVAL_SECONDS` | no | `300` | Seconds between polls (ignored with `--once`) |
+| `POLL_INTERVAL_SECONDS` | no | `60` | Seconds between polls (ignored with `--once`) |
 | `DISCORD_WEBHOOK_URL` | no | — | If set, sends a Discord message when the cookie expires (HTTP 403) |
 
 ## Running
